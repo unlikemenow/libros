@@ -211,23 +211,15 @@
   .container { max-width: 680px; margin: 0 auto; padding: 48px 20px 100px; position: relative; z-index: 1; }
 
   /* Glass base with rotating glow border */
-  .glass {
+  .glass-wrap {
     position: relative;
-    background: var(--glass-bg);
-    backdrop-filter: blur(24px) saturate(1.4);
-    -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow), var(--glass-inset);
-    border-radius: 18px;
-    transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease;
-    z-index: 1;
+    border-radius: 20px;
+    padding: 2px;
+    transition: transform .3s cubic-bezier(.16,1,.3,1);
   }
-  .stat { isolation: isolate; }
-  .stat-num, .stat-text, .stat-label { position: relative; z-index: 2; }
-  .glass::before {
-    content: '';
+  .glass-wrap .glow-ring {
     position: absolute;
-    inset: -2px;
+    inset: 0;
     border-radius: 20px;
     background: conic-gradient(
       from var(--glow-angle, 0deg),
@@ -242,29 +234,25 @@
     );
     opacity: 0;
     transition: opacity .4s ease;
-    z-index: -2;
     animation: none;
   }
-  .glass::after {
-    content: '';
-    position: absolute;
-    inset: 2px;
-    border-radius: 16px;
-    background: var(--glass-inner);
-    backdrop-filter: blur(24px) saturate(1.4);
-    -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    z-index: -1;
-    transition: background .3s;
-  }
-  .glass:hover::before {
+  .glass-wrap:hover .glow-ring {
     opacity: 1;
     animation: glowSpin 3s linear infinite;
   }
-  .glass:hover::after {
-    background: var(--glass-bg-hover);
+  .glass {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), var(--glass-inset);
+    border-radius: 18px;
+    transition: box-shadow .3s ease, background .2s ease, border-color .3s;
   }
-  .glass:hover {
-    border-color: var(--glass-hover-border-color);
+  .glass-wrap:hover .glass {
+    border-color: transparent;
+    background: var(--glass-bg-hover);
     box-shadow: var(--glass-hover-shadow), var(--glass-hover-inset);
   }
 
@@ -335,6 +323,7 @@
 
   /* Stats */
   .stats { display: flex; gap: 10px; margin-bottom: 20px; }
+  .stats .glass-wrap { flex: 1; }
   .stat { flex: 1; padding: 20px 14px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 90px; cursor: pointer; }
   .stat-num { font-size: 2.4rem; font-weight: 700; color: var(--stat-num); letter-spacing: -0.03em; }
   .stat-text { font-size: 1.1rem; font-weight: 600; color: var(--stat-text); letter-spacing: -0.01em; line-height: 1.25; }
@@ -666,9 +655,9 @@
   </div>
   <p class="subtitle" id="subtitle"></p>
   <div class="stats">
-    <div class="stat glass"><div class="stat-num" id="total-count">0</div><div class="stat-label">Books</div></div>
-    <div class="stat glass"><div class="stat-text" id="fav-author"></div><div class="stat-label">Top Author</div></div>
-    <div class="stat glass"><div class="stat-text" id="recent-book"></div><div class="stat-label">Recently Read</div></div>
+    <div class="glass-wrap"><div class="glow-ring"></div><div class="stat glass"><div class="stat-num" id="total-count">0</div><div class="stat-label">Books</div></div></div>
+    <div class="glass-wrap"><div class="glow-ring"></div><div class="stat glass"><div class="stat-text" id="fav-author"></div><div class="stat-label">Top Author</div></div></div>
+    <div class="glass-wrap"><div class="glow-ring"></div><div class="stat glass"><div class="stat-text" id="recent-book"></div><div class="stat-label">Recently Read</div></div></div>
   </div>
   <div class="search-wrap">
     <div class="search-bar">
@@ -1065,7 +1054,7 @@ function applyGlassHover(el, transformOnly) {
     if (!transformOnly) { el.style.background = ''; el.style.boxShadow = ''; el.style.borderColor = ''; }
   });
 }
-document.querySelectorAll('.glass').forEach(applyGlassHover);
+document.querySelectorAll('.glass-wrap').forEach(applyGlassHover);
 // Logo — just tilt, no scale
 const logoEl = document.querySelector('.logo');
 logoEl.addEventListener('mouseenter', e => {
