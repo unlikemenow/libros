@@ -382,7 +382,7 @@
     );
     opacity: 0;
     transition: opacity .3s;
-    z-index: -2;
+    z-index: 0;
     animation: none;
   }
   .add-btn::after {
@@ -391,7 +391,7 @@
     inset: 2px;
     border-radius: 10px;
     background: var(--accent-bg);
-    z-index: -1;
+    z-index: 1;
     transition: background .2s;
   }
   .add-btn:hover { color: var(--accent-dark); transform: scale(1.08); border-color: transparent; }
@@ -610,36 +610,46 @@
     font-size: 0.68rem; color: var(--footer-color);
   }
 
-  /* Sync */
+  /* Sync — mirrors .add-btn exactly */
   .sync-btn {
-    width: 32px; height: 32px; border-radius: 10px; border: none;
+    width: 36px; height: 36px; border-radius: 12px; border: none;
     background: var(--accent-bg); color: var(--accent);
-    font-size: 0.85rem; cursor: pointer;
+    font-size: 1rem; line-height: 1; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: all .25s cubic-bezier(.16,1,.3,1);
+    padding: 0;
+    transition: all .25s cubic-bezier(.16,1,.3,1); flex-shrink: 0;
     position: relative; overflow: hidden;
   }
   .sync-btn::before {
     content: '';
-    position: absolute; inset: -2px; border-radius: 12px;
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
     background: conic-gradient(
       from var(--glow-angle, 0deg),
       transparent 0%, var(--glow-btn-1) 15%, transparent 30%,
       transparent 70%, var(--glow-btn-2) 85%, transparent 100%
     );
-    opacity: 0; transition: opacity .3s; z-index: -2; animation: none;
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: 0;
+    animation: none;
   }
   .sync-btn::after {
     content: '';
-    position: absolute; inset: 2px; border-radius: 8px;
-    background: var(--accent-bg); z-index: -1; transition: background .2s;
+    position: absolute;
+    inset: 2px;
+    border-radius: 10px;
+    background: var(--accent-bg);
+    z-index: 1;
+    transition: background .2s;
   }
+  .sync-icon { position: relative; z-index: 2; display: inline-block; }
   .sync-btn:hover { color: var(--accent-dark); transform: scale(1.08); border-color: transparent; }
   .sync-btn:hover::before { opacity: 1; animation: glowSpin 2s linear infinite; }
   .sync-btn:hover::after { background: var(--accent-bg-hover); }
   .sync-btn.syncing .sync-icon { animation: syncSpin 1s linear infinite; }
   @keyframes syncSpin { 100% { transform: rotate(360deg); } }
-  .sync-icon { display: inline-block; }
   .header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; position: relative; }
 </style>
 </head>
@@ -662,7 +672,7 @@
   <div class="search-wrap">
     <div class="search-bar">
       <input class="search" type="text" id="search" placeholder="Search books or authors..." autocomplete="off" spellcheck="false">
-      <button class="add-btn" id="add-btn" title="Add book">+</button>
+      <button class="add-btn" id="add-btn" title="Add book"><span style="position:relative;z-index:2">+</span></button>
     </div>
   </div>
   <p class="search-result-count" id="result-count"></p>
