@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIBROS</title>
+<style>
+  :root {
+    --bg-gradient: linear-gradient(135deg, #e8dff5 0%, #d4e4f7 25%, #f0e6f6 50%, #dce8f8 75%, #ecdaf5 100%);
+    --blob1: rgba(180,160,255,0.3);
+    --blob2: rgba(160,210,255,0.3);
+    --glass-bg: rgba(255,255,255,0.35);
+    --glass-border: rgba(255,255,255,0.6);
+    --glass-shadow: 0 4px 30px rgba(0,0,0,0.04);
+    --glass-inset: inset 0 1px 0 rgba(255,255,255,0.8);
+    --glass-bg-hover: rgba(255,255,255,0.45);
+    --glass-inner: rgba(255,255,255,0.35);
+    --text-primary: #2c2c3a;
+    --text-secondary: #5a5a72;
+    --text-muted: #8e8ea0;
+    --text-faint: #a0a0b8;
+    --text-fainter: #b0b0c4;
+    --text-num: #c4c4d4;
+    --accent: #7b6bbd;
+    --accent-dark: #5a48a3;
+    --accent-bg: rgba(140,120,220,0.15);
+    --accent-bg-hover: rgba(140,120,220,0.25);
+    --search-bg: rgba(255,255,255,0.45);
+    --search-bg-hover: rgba(255,255,255,0.55);
+    --search-border: rgba(255,255,255,0.65);
+    --search-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    --search-shadow-hover: 0 6px 30px rgba(100,80,180,0.06);
+    --year-bg: rgba(255,255,255,0.28);
+    --year-bg-hover: rgba(255,255,255,0.45);
+    --year-border: rgba(255,255,255,0.5);
+    --year-shadow: 0 2px 12px rgba(0,0,0,0.02);
+    --year-shadow-hover: 0 4px 20px rgba(100,80,180,0.06);
+    --book-list-bg: rgba(255,255,255,0.2);
+    --book-list-border: rgba(255,255,255,0.45);
+    --book-hover: rgba(255,255,255,0.22);
+    --book-border: rgba(255,255,255,0.3);
+    --modal-overlay: rgba(200,195,220,0.4);
+    --modal-bg: rgba(255,255,255,0.6);
+    --modal-border: rgba(255,255,255,0.75);
+    --modal-shadow: 0 24px 80px rgba(80,60,140,0.12);
+    --input-bg: rgba(255,255,255,0.5);
+    --input-bg-hover: rgba(255,255,255,0.6);
+    --input-bg-focus: rgba(255,255,255,0.65);
+    --input-border: rgba(255,255,255,0.6);
+    --input-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+    --toast-bg: rgba(255,255,255,0.65);
+    --toast-border: rgba(255,255,255,0.7);
+    --toast-shadow: 0 8px 30px rgba(80,60,140,0.1);
+    --mark-bg: rgba(140,120,220,0.2);
+    --mark-color: #5a48a3;
+    --title-gradient: linear-gradient(135deg, #4a3f6b 0%, #7b6bbd 50%, #a094d4 100%);
+    --glow-1: rgba(160,140,255,0.5);
+    --glow-2: rgba(120,180,255,0.4);
+    --glow-3: rgba(200,160,255,0.4);
+    --glow-4: rgba(140,200,255,0.5);
+    --glow-logo-1: rgba(160,140,255,0.7);
+    --glow-logo-2: rgba(120,180,255,0.6);
+    --glow-logo-3: rgba(200,160,255,0.6);
+    --glow-logo-4: rgba(140,200,255,0.7);
+    --glow-btn-1: rgba(160,140,255,0.6);
+    --glow-btn-2: rgba(140,200,255,0.6);
+    --wishlist-title: #4a3f6b;
+    --shop-pl-bg: rgba(220,60,60,0.08);
+    --shop-pl-color: #c44;
+    --shop-pl-bg-hover: rgba(220,60,60,0.18);
+    --cancel-bg: rgba(0,0,0,0.04);
+    --cancel-bg-hover: rgba(0,0,0,0.08);
+    --stat-num: #1d1d2e;
+    --stat-text: #3a3a52;
+    --glass-hover-shadow: 0 8px 40px rgba(130,110,220,0.12);
+    --glass-hover-inset: inset 0 1px 0 rgba(255,255,255,0.9);
+    --glass-hover-border-color: transparent;
+    --glass-press-bg: rgba(255,255,255,0.5);
+    --glass-press-shadow: 0 2px 12px rgba(100,80,180,0.06), inset 0 1px 0 rgba(255,255,255,0.95);
+    --glass-press-border: rgba(255,255,255,0.85);
+    --glass-release-shadow: 0 8px 40px rgba(100,80,180,0.08), inset 0 1px 0 rgba(255,255,255,0.9);
+    --done-bg: rgba(80,180,100,0.12);
+    --done-color: #4a9;
+    --done-bg-hover: rgba(80,180,100,0.25);
+    --remove-bg: rgba(220,60,60,0.08);
+    --remove-color: #c44;
+    --remove-bg-hover: rgba(220,60,60,0.18);
+    --accent-focus-ring: rgba(140,120,220,0.1);
+    --accent-focus-border: rgba(140,120,220,0.4);
+    --footer-color: #a0a0b8;
+    --footer-link: #7b6bbd;
+    --footer-link-hover: #5a48a3;
+    --toggle-bg: rgba(255,255,255,0.35);
+    --toggle-border: rgba(255,255,255,0.6);
+    --toggle-color: #7b6bbd;
+    --toggle-hover-bg: rgba(255,255,255,0.5);
+  }
+
+  [data-theme="dark"] {
+    --bg-gradient: linear-gradient(135deg, #0a0a1a 0%, #0d0d20 25%, #0a0a18 50%, #0e0e22 75%, #0a0a1a 100%);
+    --blob1: rgba(80,60,180,0.2);
+    --blob2: rgba(60,100,180,0.2);
+    --glass-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    --glass-inset: inset 0 1px 0 rgba(255,255,255,0.08);
+    --glass-bg-hover: rgba(255,255,255,0.1);
+    --glass-inner: rgba(255,255,255,0.06);
+    --text-primary: #ededfc;
+    --text-secondary: #c0c0d8;
+    --text-muted: #9090a8;
+    --text-faint: #787892;
+    --text-fainter: #606078;
+    --text-num: #484860;
+    --accent: #9d8fee;
+    --accent-dark: #b8adff;
+    --accent-bg: rgba(140,120,220,0.2);
+    --accent-bg-hover: rgba(140,120,220,0.35);
+    --search-bg: rgba(255,255,255,0.06);
+    --search-bg-hover: rgba(255,255,255,0.1);
+    --search-border: rgba(255,255,255,0.1);
+    --search-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    --search-shadow-hover: 0 6px 30px rgba(100,80,220,0.1);
+    --year-bg: rgba(255,255,255,0.04);
+    --year-bg-hover: rgba(255,255,255,0.08);
+    --year-border: rgba(255,255,255,0.08);
+    --year-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    --year-shadow-hover: 0 4px 20px rgba(100,80,220,0.1);
+    --book-list-bg: rgba(255,255,255,0.03);
+    --book-list-border: rgba(255,255,255,0.06);
+    --book-hover: rgba(255,255,255,0.06);
+    --book-border: rgba(255,255,255,0.05);
+    --modal-overlay: rgba(0,0,10,0.6);
+    --modal-bg: rgba(20,20,35,0.85);
+    --modal-border: rgba(255,255,255,0.1);
+    --modal-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    --input-bg: rgba(255,255,255,0.06);
+    --input-bg-hover: rgba(255,255,255,0.09);
+    --input-bg-focus: rgba(255,255,255,0.1);
+    --input-border: rgba(255,255,255,0.1);
+    --input-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+    --toast-bg: rgba(30,30,50,0.85);
+    --toast-border: rgba(255,255,255,0.1);
+    --toast-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    --mark-bg: rgba(140,120,220,0.3);
+    --mark-color: #c4b8ff;
+    --title-gradient: linear-gradient(135deg, #9d8fee 0%, #b8adff 50%, #c8bfff 100%);
+    --glow-1: rgba(160,140,255,0.6);
+    --glow-2: rgba(120,180,255,0.5);
+    --glow-3: rgba(200,160,255,0.5);
+    --glow-4: rgba(140,200,255,0.6);
+    --glow-logo-1: rgba(160,140,255,0.8);
+    --glow-logo-2: rgba(120,180,255,0.7);
+    --glow-logo-3: rgba(200,160,255,0.7);
+    --glow-logo-4: rgba(140,200,255,0.8);
+    --glow-btn-1: rgba(160,140,255,0.7);
+    --glow-btn-2: rgba(140,200,255,0.7);
+    --wishlist-title: #b8adff;
+    --shop-pl-bg: rgba(255,80,80,0.12);
+    --shop-pl-color: #f66;
+    --shop-pl-bg-hover: rgba(255,80,80,0.22);
+    --cancel-bg: rgba(255,255,255,0.06);
+    --cancel-bg-hover: rgba(255,255,255,0.1);
+    --stat-num: #e0e0ef;
+    --stat-text: #d8d8f0;
+    --glass-hover-shadow: 0 8px 40px rgba(130,110,220,0.2);
+    --glass-hover-inset: inset 0 1px 0 rgba(255,255,255,0.15);
+    --glass-hover-border-color: transparent;
+    --glass-press-bg: rgba(255,255,255,0.1);
+    --glass-press-shadow: 0 2px 12px rgba(100,80,180,0.1), inset 0 1px 0 rgba(255,255,255,0.12);
+    --glass-press-border: rgba(255,255,255,0.15);
+    --glass-release-shadow: 0 8px 40px rgba(100,80,180,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+    --done-bg: rgba(80,180,100,0.15);
+    --done-color: #5cb87a;
+    --done-bg-hover: rgba(80,180,100,0.3);
+    --remove-bg: rgba(255,80,80,0.12);
+    --remove-color: #f66;
+    --remove-bg-hover: rgba(255,80,80,0.22);
+    --accent-focus-ring: rgba(140,120,220,0.2);
+    --accent-focus-border: rgba(140,120,220,0.5);
+    --footer-color: #4a4a62;
+    --footer-link: #9d8fee;
+    --footer-link-hover: #b8adff;
+    --toggle-bg: rgba(255,255,255,0.06);
+    --toggle-border: rgba(255,255,255,0.1);
+    --toggle-color: #b8adff;
+    --toggle-hover-bg: rgba(255,255,255,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition: background .4s ease, color .3s ease;
+  }
+
+  /* Ambient blobs */
+  body::before, body::after {
+    content: ''; position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(100px);
+    transition: background .4s ease;
+  }
+  body::before { width: 600px; height: 600px; background: var(--blob1); top: -100px; right: -150px; }
+  body::after { width: 500px; height: 500px; background: var(--blob2); bottom: -100px; left: -100px; }
+
+  .container { max-width: 680px; margin: 0 auto; padding: 48px 20px 100px; position: relative; z-index: 1; }
+
+  /* Glass base with rotating glow border */
+  .glass {
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), var(--glass-inset);
+    border-radius: 18px;
+    transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .glass::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 20px;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      transparent 0%,
+      var(--glow-1) 10%,
+      var(--glow-2) 20%,
+      transparent 30%,
+      transparent 70%,
+      var(--glow-3) 80%,
+      var(--glow-4) 90%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity .4s ease;
+    z-index: -2;
+    animation: none;
+  }
+  .glass::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 16px;
+    background: var(--glass-inner);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    z-index: -1;
+    transition: background .3s;
+  }
+  .glass:hover::before {
+    opacity: 1;
+    animation: glowSpin 3s linear infinite;
+  }
+  .glass:hover::after {
+    background: var(--glass-bg-hover);
+  }
+  .glass:hover {
+    border-color: var(--glass-hover-border-color);
+    box-shadow: var(--glass-hover-shadow), var(--glass-hover-inset);
+  }
+
+  @property --glow-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+  @keyframes glowSpin {
+    0% { --glow-angle: 0deg; }
+    100% { --glow-angle: 360deg; }
+  }
+
+  /* Header */
+  .header { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; position: relative; }
+  .logo {
+    width: 48px; height: 48px; cursor: pointer; flex-shrink: 0;
+    transition: transform .3s cubic-bezier(.16,1,.3,1);
+    position: relative;
+  }
+  .logo img {
+    width: 100%; height: 100%; object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+    position: relative; z-index: 1;
+  }
+  .logo::before {
+    content: '';
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      transparent 0%, var(--glow-logo-1) 10%, var(--glow-logo-2) 20%,
+      transparent 30%, transparent 70%,
+      var(--glow-logo-3) 80%, var(--glow-logo-4) 90%, transparent 100%
+    );
+    opacity: 0;
+    transition: opacity .4s ease;
+    filter: blur(5px);
+    z-index: 0;
+    animation: none;
+  }
+  .logo:hover::before { opacity: 1; animation: glowSpin 2.5s linear infinite; }
+  h1 {
+    font-size: 2.6rem; font-weight: 800; letter-spacing: 0.12em;
+    background: var(--title-gradient);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-variant: small-caps;
+  }
+  .subtitle { color: var(--text-muted); font-size: 0.88rem; margin-top: 3px; margin-bottom: 28px; }
+
+  /* Theme toggle */
+  .theme-toggle {
+    position: absolute; top: 0; right: 0;
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--toggle-border);
+    background: var(--toggle-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--toggle-color);
+    font-size: 1.1rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .25s ease;
+    z-index: 10;
+  }
+  .theme-toggle:hover {
+    background: var(--toggle-hover-bg);
+    transform: scale(1.08);
+  }
+
+  /* Stats */
+  .stats { display: flex; gap: 10px; margin-bottom: 20px; }
+  .stat { flex: 1; padding: 20px 14px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 90px; cursor: pointer; }
+  .stat-num { font-size: 2.4rem; font-weight: 700; color: var(--stat-num); letter-spacing: -0.03em; }
+  .stat-text { font-size: 1.1rem; font-weight: 600; color: var(--stat-text); letter-spacing: -0.01em; line-height: 1.25; }
+  .stat-label { font-size: 0.65rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 6px; }
+
+  /* Search */
+  .search-wrap { position: sticky; top: 0; z-index: 20; padding: 10px 0; }
+  .search-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 6px 6px 18px;
+    background: var(--search-bg);
+    backdrop-filter: blur(30px) saturate(1.5);
+    -webkit-backdrop-filter: blur(30px) saturate(1.5);
+    border: 1px solid var(--search-border);
+    box-shadow: var(--search-shadow), var(--glass-inset);
+    border-radius: 16px;
+    transition: background .2s, box-shadow .2s;
+  }
+  .search-bar:hover, .search-bar:focus-within {
+    background: var(--search-bg-hover);
+    box-shadow: var(--search-shadow-hover), var(--glass-hover-inset);
+  }
+  .search {
+    flex: 1; padding: 10px 0; font-size: 0.92rem;
+    border: none; background: transparent; color: var(--text-primary); outline: none;
+  }
+  .search::placeholder { color: var(--text-fainter); }
+  .add-btn {
+    width: 36px; height: 36px; border-radius: 12px; border: none;
+    background: var(--accent-bg); color: var(--accent);
+    font-size: 1.5rem; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 0 2px 0;
+    transition: all .25s cubic-bezier(.16,1,.3,1); flex-shrink: 0;
+    position: relative; overflow: hidden;
+  }
+  .add-btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 14px;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      transparent 0%, var(--glow-btn-1) 15%, transparent 30%,
+      transparent 70%, var(--glow-btn-2) 85%, transparent 100%
+    );
+    opacity: 0;
+    transition: opacity .3s;
+    z-index: -2;
+    animation: none;
+  }
+  .add-btn::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 10px;
+    background: var(--accent-bg);
+    z-index: -1;
+    transition: background .2s;
+  }
+  .add-btn:hover { color: var(--accent-dark); transform: scale(1.08); border-color: transparent; }
+  .add-btn:hover::before { opacity: 1; animation: glowSpin 2s linear infinite; }
+  .add-btn:hover::after { background: var(--accent-bg-hover); }
+
+  .search-result-count { font-size: 0.78rem; color: var(--text-faint); margin: 8px 0 12px 4px; display: none; }
+
+  /* Year sections */
+  .year-section { margin-bottom: 6px; }
+  .year-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 18px; cursor: pointer; user-select: none;
+    background: var(--year-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--year-border);
+    border-radius: 14px;
+    transition: all .2s cubic-bezier(.16,1,.3,1);
+    box-shadow: var(--year-shadow);
+  }
+  .year-header:hover { background: var(--year-bg-hover); box-shadow: var(--year-shadow-hover); transform: translateY(-1px); }
+  .year-header.open { border-radius: 14px 14px 0 0; border-bottom-color: transparent; box-shadow: none; transform: none; }
+  .year-title { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+  .year-count { font-size: 0.78rem; color: var(--text-faint); display: flex; align-items: center; gap: 8px; }
+  .year-count .arrow { transition: transform .25s ease; font-size: 0.55rem; }
+  .year-header.open .arrow { transform: rotate(180deg); }
+  .book-list {
+    display: none;
+    border: 1px solid var(--book-list-border); border-top: none;
+    border-radius: 0 0 14px 14px;
+    background: var(--book-list-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+  }
+  .year-header.open + .book-list { display: block; }
+  .book {
+    padding: 9px 18px; display: flex; align-items: center; gap: 10px;
+    transition: all .15s ease;
+    border-bottom: 1px solid var(--book-border);
+    position: relative;
+  }
+  .book:last-child { border-bottom: none; }
+  .book:hover { background: var(--book-hover); }
+  .book-num { font-size: 0.65rem; color: var(--text-num); min-width: 18px; text-align: right; font-variant-numeric: tabular-nums; }
+  .book-title { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; flex: 1; min-width: 0; }
+  .book-title .author { color: var(--text-primary); font-weight: 500; }
+  .book-title mark { background: var(--mark-bg); color: var(--mark-color); border-radius: 3px; padding: 0 3px; }
+  .no-results { text-align: center; padding: 48px 20px; color: var(--text-fainter); font-size: 0.92rem; }
+
+  /* Book actions (edit/delete) */
+  .book-actions {
+    display: flex; gap: 3px; flex-shrink: 0; align-items: center;
+    opacity: 0; transition: opacity .15s ease;
+  }
+  .book:hover .book-actions { opacity: 1; }
+  .book-edit {
+    width: 18px; height: 18px; border-radius: 5px; border: none;
+    font-size: 0.6rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s ease; padding: 0; line-height: 1;
+    background: var(--accent-bg); color: var(--accent);
+  }
+  .book-edit:hover { background: var(--accent-bg-hover); transform: scale(1.1); }
+  .btn-delete {
+    padding: 10px; font-size: 0.82rem; font-weight: 600;
+    border: none; border-radius: 11px; cursor: pointer; transition: all .2s;
+    background: var(--remove-bg); color: var(--remove-color); width: 100%; margin-top: 8px;
+  }
+  .btn-delete:hover { background: var(--remove-bg-hover); transform: translateY(-1px); }
+
+  /* Wishlist */
+  .wishlist-section { margin-top: 32px; }
+  .wishlist-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .wishlist-title { font-size: 1.1rem; font-weight: 600; color: var(--wishlist-title); letter-spacing: -0.02em; }
+  .wishlist-count { font-size: 0.78rem; color: var(--text-faint); }
+  .wishlist-empty { text-align: center; padding: 24px; color: var(--text-fainter); font-size: 0.82rem; }
+  .wish-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; margin-bottom: 6px;
+    position: relative; overflow: hidden; z-index: 1;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow), var(--glass-inset);
+    border-radius: 16px;
+    transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease, background .2s ease;
+    cursor: pointer;
+  }
+  .wish-item::before {
+    content: '';
+    position: absolute; inset: -2px; border-radius: 18px;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      transparent 0%, var(--glow-1) 10%, var(--glow-2) 20%,
+      transparent 30%, transparent 70%,
+      var(--glow-3) 80%, var(--glow-4) 90%, transparent 100%
+    );
+    opacity: 0; transition: opacity .4s ease; z-index: -2; animation: none;
+  }
+  .wish-item::after {
+    content: '';
+    position: absolute; inset: 2px; border-radius: 14px;
+    background: var(--glass-inner);
+    backdrop-filter: blur(24px) saturate(1.4);
+    -webkit-backdrop-filter: blur(24px) saturate(1.4);
+    z-index: -1; transition: background .3s;
+  }
+  .wish-item:hover::before { opacity: 1; animation: glowSpin 3s linear infinite; }
+  .wish-item:hover::after { background: var(--glass-bg-hover); }
+  .wish-item:hover { border-color: var(--glass-hover-border-color); box-shadow: var(--glass-hover-shadow), var(--glass-hover-inset); }
+  .wish-info { flex: 1; min-width: 0; }
+  .wish-book { font-size: 0.85rem; color: var(--text-primary); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wish-author { font-size: 0.75rem; color: var(--text-muted); }
+  .wish-actions { display: flex; gap: 4px; flex-shrink: 0; align-items: center; }
+  .shop-btn {
+    font-size: 0.58rem; font-weight: 700; text-decoration: none; text-transform: uppercase;
+    padding: 3px 6px; border-radius: 5px; letter-spacing: 0.03em;
+    background: rgba(140,120,220,0.1); color: var(--accent);
+    transition: all .15s; white-space: nowrap;
+  }
+  .shop-btn:hover { background: var(--accent-bg-hover); color: var(--accent-dark); }
+  .shop-btn.pl { background: var(--shop-pl-bg); color: var(--shop-pl-color); }
+  .shop-btn.pl:hover { background: var(--shop-pl-bg-hover); }
+  .wish-done {
+    width: 22px; height: 22px; border-radius: 6px; border: none;
+    background: var(--done-bg); color: var(--done-color); font-size: 0.75rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all .15s; margin-left: 4px;
+  }
+  .wish-done:hover { background: var(--done-bg-hover); transform: scale(1.1); }
+  .wish-remove {
+    width: 22px; height: 22px; border-radius: 6px; border: none;
+    background: var(--remove-bg); color: var(--remove-color); font-size: 0.7rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+  }
+  .wish-remove:hover { background: var(--remove-bg-hover); transform: scale(1.1); }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 100;
+    background: var(--modal-overlay);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    width: 90%; max-width: 360px; padding: 28px 24px;
+    background: var(--modal-bg);
+    backdrop-filter: blur(50px) saturate(2);
+    -webkit-backdrop-filter: blur(50px) saturate(2);
+    border: 1px solid var(--modal-border);
+    border-radius: 22px;
+    box-shadow: var(--modal-shadow), var(--glass-hover-inset);
+  }
+  .modal h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
+  .modal input {
+    width: 100%; padding: 11px 14px; font-size: 0.88rem;
+    background: var(--input-bg); border: 1px solid var(--input-border);
+    border-radius: 11px; color: var(--text-primary); outline: none; margin-bottom: 8px;
+    box-shadow: var(--input-shadow);
+    transition: all .2s;
+  }
+  .modal input:focus { border-color: var(--accent-focus-border); box-shadow: 0 0 0 3px var(--accent-focus-ring); background: var(--input-bg-focus); }
+  .modal input:hover { background: var(--input-bg-hover); }
+  .modal input::placeholder { color: var(--text-fainter); }
+  .modal-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .modal-actions button {
+    flex: 1; padding: 10px; font-size: 0.82rem; font-weight: 600;
+    border: none; border-radius: 11px; cursor: pointer; transition: all .2s;
+  }
+  .btn-cancel { background: var(--cancel-bg); color: var(--text-muted); }
+  .btn-cancel:hover { background: var(--cancel-bg-hover); transform: translateY(-1px); }
+  .btn-save { background: var(--accent-bg); color: var(--accent-dark); }
+  .btn-save:hover { background: var(--accent-bg-hover); transform: translateY(-1px); }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+    padding: 11px 22px; border-radius: 14px;
+    background: var(--toast-bg);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--toast-border);
+    box-shadow: var(--toast-shadow);
+    color: var(--text-primary); font-size: 0.82rem; font-weight: 500;
+    opacity: 0; transition: all .4s cubic-bezier(.16,1,.3,1); z-index: 50; pointer-events: none;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  .toast-undo {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 4px 10px; border-radius: 7px; border: none; cursor: pointer;
+    background: var(--accent-bg); color: var(--accent);
+    transition: all .15s;
+  }
+  .toast-undo:hover { background: var(--accent-bg-hover); }
+
+  /* Footer */
+  .export-import-footer {
+    text-align: center; padding: 28px 0 12px; margin-top: 24px;
+  }
+  .export-import-footer a {
+    font-size: 0.72rem; color: var(--footer-link); text-decoration: none;
+    cursor: pointer; transition: color .15s; margin: 0 10px;
+    letter-spacing: 0.02em;
+  }
+  .export-import-footer a:hover { color: var(--footer-link-hover); text-decoration: underline; }
+  .export-import-footer span {
+    font-size: 0.68rem; color: var(--footer-color);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo"><img src="win95flag.png" alt="Windows 95"></div>
+    <h1>libros</h1>
+    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">&#9790;</button>
+  </div>
+  <p class="subtitle" id="subtitle"></p>
+  <div class="stats">
+    <div class="stat glass"><div class="stat-num" id="total-count">0</div><div class="stat-label">Books</div></div>
+    <div class="stat glass"><div class="stat-text" id="fav-author"></div><div class="stat-label">Top Author</div></div>
+    <div class="stat glass"><div class="stat-text" id="recent-book"></div><div class="stat-label">Recently Read</div></div>
+  </div>
+  <div class="search-wrap">
+    <div class="search-bar">
+      <input class="search" type="text" id="search" placeholder="Search books or authors..." autocomplete="off" spellcheck="false">
+      <button class="add-btn" id="add-btn" title="Add book">+</button>
+    </div>
+  </div>
+  <p class="search-result-count" id="result-count"></p>
+  <div id="content"></div>
+  <p class="no-results" id="no-results" style="display:none">No books found.</p>
+
+  <div class="wishlist-section">
+    <div class="wishlist-header">
+      <span class="wishlist-title">Wishlist</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="wishlist-count" id="wish-count"></span>
+        <button class="add-btn" id="wish-add-btn" title="Add to wishlist">+</button>
+      </div>
+    </div>
+    <div id="wishlist-content"></div>
+  </div>
+
+  <div class="export-import-footer">
+    <a onclick="exportData()">Export</a>
+    <span>&middot;</span>
+    <a onclick="importData()">Import</a>
+    <input type="file" id="import-file" accept=".json" style="display:none">
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Add a book</h3>
+    <input type="text" id="input-author" placeholder="Author" autocomplete="off" spellcheck="false">
+    <input type="text" id="input-title" placeholder="Title" autocomplete="off" spellcheck="false">
+    <div class="modal-actions">
+      <button class="btn-cancel" id="btn-cancel">Cancel</button>
+      <button class="btn-save" id="btn-save">Add</button>
+    </div>
+    <button class="btn-delete" id="btn-modal-delete" style="display:none" onclick="deleteFromModal()">Delete this book</button>
+  </div>
+</div>
+<div class="modal-overlay" id="wish-modal">
+  <div class="modal">
+    <h3>Add to wishlist</h3>
+    <input type="text" id="wish-input-author" placeholder="Author" autocomplete="off" spellcheck="false">
+    <input type="text" id="wish-input-title" placeholder="Title (optional — leave empty to browse author)" autocomplete="off" spellcheck="false">
+    <div class="modal-actions">
+      <button class="btn-cancel" id="wish-btn-cancel">Cancel</button>
+      <button class="btn-save" id="wish-btn-save">Add</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// Theme toggle
+(function initTheme() {
+  const saved = localStorage.getItem('libros_theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  updateToggleIcon();
+})();
+
+function updateToggleIcon() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  btn.innerHTML = isDark ? '&#9788;' : '&#9790;';
+  btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+}
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('libros_theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('libros_theme', 'dark');
+  }
+  updateToggleIcon();
+});
+
+const STORAGE_KEY = 'libros_books';
+const defaultBooks = {
+"2019":["Jakub Zulczyk - Slepnac od Swiatel","Simon Sinek - Liderzy jedza na koncu","CodeSprinters - Jak oswoid Agile?","William Ury - Dochodzac do TAK","Marini - The Dark Prince Charming 1/2","Marini - The Dark Prince Charming 2/2","Frank Miller / Brian Azzarello - Ostatnia Krucjata","Tony Mann - Facylitacja","Simon Sinek - Zaczynaj od dlaczego","Jakub Zulczyk - Zrob mi jakas krzywde","Brian Azzarello - Rozbite Miasto","Charles Burns - Black Hole","Batman - Deus Ex Machina vol.4","Scott Duncan - Understanding Agile Values & Principles","Daniel H. Pink - Kiedy","Jakub Zulczyk - Zmorojewo","Thomas Erikson - Otoczeni przez psychopatow","Quebinafide / Kuba Stemplowski - Egzotyka","ALLSTAR Batman vol. 3 - Pierwszy Sojusznik","Jakub Zulczyk - Swiatynia","Jakub Zulczyk - Instytut","Batman vol. 5 - Zareczeni","Jakub Zulczyk - Wzgorze Psow","Liga Sprawiedliwosci - Dziedzictwo","Jakub Zulczyk - Radio Armageddon","Batman vol. 5 - Zycie w Samotnosci","Michel Houellebecq - Serotonina","J. Maarten Troost - Zycie seksualne kanibali","Batman vol. 6 - Narzeczona czy wlamywaczka","David Foster Wallace - Niepamiec","Esther Perel - Kocha lubi zdradza","Daniel Goleman - Inteligencja emocjonalna","George Orwell - Folwark Zwierzecy","Mary Blume - Cristobal Balenciaga. Mistrz nas wszystkich","Batman DC tom 6 - Upadek Batmanow","Esther Perel - Mating in Captivity","Sean Murphy - Batman Bialy Rycerz","Batman tom 7 - Slub","Liga Sprawiedliwosci - Bez Sprawiedliwosci","Sarah Cooper - 100 tricks to appear smart in Meetings","Steve Wright - Banksy. Nie ma jak w domu","Pawel Jaronski - Radosc","Jakub Zulczyk - Czarne Slonce","Batman DC tom 7 - Wieczni Batmani","Charles Bukowski - Szmira","Joan Cornella - ZONZO","Gene Brewer - K-PAX","Weronika Muszkieta, Ola Sienko - projekt ROSLINY","Batman tom 8 - Zimne Dni","Liga Sprawiedliwosci tom 1 - Totalnosc","Artur Schopenhauer - Erystyka","Brian Azzarello - Batman Przeklety","Fabio Chiusi - Black Mirror. Czy to juz sie dzieje?","Batman DC tom 8 - Na Zewnatrz","Gene Brewer - Na Promieniu Swiatla"],
+"2020":["Hal Elrod - Fenomen Poranka","Krzysztof Gonciarz - RIGCZ","Karolina Jozwik, Szymon Zwolinski - Myslenie wizualne w biznesie","Olbinski - Malarstwo/Painting","Rafal Olbinski - Ars pictuare","James Clear - Atomic Habits","Caroline Kepnes - You","Batman tom 9 - Drapiezne Ptaki","Liga Sprawiedliwosci tom 2 - Cmentarzysko Bogow","Ken Blanchard & Renee Broadwell - Servant Leadership w praktyce","Caroline Kepnes - Hidden Bodies","Beata Michalska-Dominiak, Piotr Grocholinski - Poradnik design thinking","Aldous Huxley - Drzwi Percepcji","Aldous Huxley - Nowy wspanialy swiat","Frank Miller - Batman Mroczny Rycerz: Rasa Panow","Jake Knapp - Pieciodniowy Sprint","Viktor E. Frankl - Czlowiek w poszukiwaniu sensu","Max Andersson - Pixy","Batman DC tom 9 - Dwa oblicza Two Face'a","Batman kontra Deathstroke","Max Andersson - Bosniacki Plaski Pies","Rafal Ohme - Emo Sapiens","Max Andersson - Pan Smierc i dziewczynka","Krystyna Janicka - Surrealizm","Irvine Welsh - Ecstasy","Rupi Kaur - Mleko i Miod","Henry Miller - Zwrotnik koziorozca","Batman tom 10 - Koszmary","Liga Sprawiedliwosci tom 3 - Planeta Jastrzebi","Irvine Welsh - Zycie seksualne blizniat syjamskich","Scott Snyder - Batman, ktory sie smieje","Piotr Szmidt - Dwa Psy Przezyly","Charles Bukowski - O milosci","Albert Hofmann - LSD... moje trudne dziecko","Irvine Welsh - Martwa natura z brzytwa","Zygmunt Freud - Wizerunek wlasny","Raphael Bob-Waksberg - Ktos, kto bedzie Cie kochal","Irvine Welsh - Brud","Michal Bulhakow - Fatalne Jaja","Batman DC - Mitologia tom 1","Chuck Palahniuk - Opetani","Batman tom 11 - Upadek","Chuck Palahniuk - Udlawic sie","Batman Detective Comics #1000","Pawel Jaronski - Tom II WESOLOSC","Pawel Jaronski - Tom III ENTUZJAZM","Chuck Palahniuk - Zmydl cos","Snyder, Capullo - Batman: Ostatni rycerz na ziemi","Denis Johnson - Syn Jezusa","Batman Detective Comics #2 - Rycerz z Arkham","Brian Bendis, Alex Maleev - Lewiatan","Tom Taylor - DCEASED: Nieumarli w swiecie DC","Joshua Williamson, David Morquez - Batman, ktory sie smieje: Zarazeni","Uniwersum DC wedlug Mike'a Mignoli","Frank Miller - Powrot Mrocznego Rycerza: Zlote Dziecko","Geoff Johns, Brad Anderson - Three Jokers"],
+"2021":["Jagoda Ratajczak - Jezyczni","Liga Sprawiedliwosci tom 4: Szosty Wymiar","Piotr Sommer - Wiersze ze slow","Thomas Ott - R.I.P. Best of 1985-2004","Batman Detective Comics #3 - Pozdrowienia z Gotham","Starlin, Wrightson, Wray - Batman: Sekta","Wojtek Friedman - Baska","Blake J. Harris - Wojny konsolowe","Lukasz Sokolowski - Dolorosa","Tom Taylor - DCEASED: Niezniszczalni","Chuck Palahniuk - Snuff","Batman tom 12 - Miasto Bane'a","Sean Murphy - Batman Klatwa Bialego Rycerza","Stefanie Stahl - Jak nie bac sie bliskosci?","Aleksandra Koperda - Odwiedziny. Rozmowy o Dizajnie","Grant Morrison - Multiwersum","Chuck Palahniuk - Pelnia Piekna","Batman - Ich mroczne plany TOM 1","Garth Ennis - Hitman","Batman Detective Comics - Tom 4: Zimna Zemsta","James Tynion IV - Batman / Wojownicze Zolwie Ninja","Liga Sprawiedliwosci: Wojna totalna. Rok Lotow","Chuck Palahniuk - Rozblysk","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #1","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #2","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #3","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #4","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #5","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #6","John Dog - Od szczeniaka!","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #7","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #8","Chuck Palahniuk / Cameron Stewart - Fight Club 2 #9","Batman Detective Comics tom 5: Wojna Jokera","Mateusz Sarzynski - Pogadanki z...","Zofia Wojtkow, Piotr Wojtkow - Szczeka, mesa, mowi","Batman - Swiat","Batman Fortnite - Punkt Zerowy","Cates, Cassara, Coello, Stegman - Venom","Jakub Mazerant - Pieces book 2","Batman - Wojna Jokera tom 2","Batman: Fortnite - Fundament","Charles Burns - Last Look","Scott Snyder, Greg Capullo - Batman Death Metal vol. 1","Scott Snyder - Batman: Budowniczy Gotham","Scott Snyder, Greg Capullo - Batman: Death Metal vol. 2","Ty Templeton - Batman and Harley Quinn"],
+"2022":["Alan Moore, Jacen Burrows - Neonomicon","Junji Ito - SMASHED","Junji Ito - Wyjace rury","Massasumi Kakizaki - Hideout","Junji Ito - Bezglowe rzezby","Dematties, Bagley, Hanna & Farmer - Batman & Spider-Man: Disordered Minds","Junji Ito - Black Paradox","Junji Ito - Miasto Nagrobkow","Mattson Tomlin - Batman: Imposter","David Gibson - The street photography's manual","John Ridley - Future Batman: The Next Batman","Junji Ito - Frankenstein","Grant Morrison - Batman Detective Comics #1027","Scott Snyder, Greg Capullo - Batman Death Metal vol. 3","Darwyn Cooke - Batman EGO","Stanley Coren - How Dogs Think","James Field, Matt Reeves - The Art of The Batman","Sam Holland - Echo Man","James Tynion IV - Batman: Opowiesc o duchach tom 3","Scott Snyder, Greg Capullo - Batman Death Metal vol. 4","Batman: Detective Comics - Droga do zaglady tom 6","Won-Pyung Sohn - Almond","Turid Rugaas - Sygnaly uspokajajace","Junji Ito - Kryjowka Dezertera","Batman - Stan Przyszlosci","Chip Kidd - Batman Death by design","Jake Dobkin - Ask a Native New Yorker","Jock - Batman: One Dark Knight","Junji Ito - Remina","Junji Ito - Tomie tom 2","Batman - Stan Przyszlosci (vol. 2)","Junji Ito - Gyo: Odor Smierci","Junji Ito - Tomie tom 1"],
+"2023":["Junji Ito - Milosne cierpienie umarlych","Charles Forsman - Koniec Zje*anego swiata","James Tynion IV - Batman: Zabobonna zgraja tom 4","Warren Ellis - Grob Batmana","Geof Johns - Batman: Ziemia Jeden","Tom King - Batman: Kompletny przewodnik","Chuck Dixon - Batman - The Chalice","Jock - Batman: Wyjatkowo mroczna noc","Batman Detective Comics - tom 1: Nowe Sasiedztwo","Emilia Dluzewska - jak plakac w miejscach publicznych","Lukasz Rylko - Retro","Lars Kepler - STALKER","James Tynion IV - Batman: Sila Strachu Saga","Lukasz Rylko - Terra Incognita","James Tynion IV - Joker: Polowanie na klauna","B.A. Paris - Za zamknietymi drzwiami","Tess Gerritsen - Chirurg","Evan Narcisse - Batman: Gotham Knights - Pozalcane miasto","Marino Tamaki - Batman: Sila Strachu tom 2","Junji Ito - Souichi i jego glupie klatwy","Tess Gerritsen - Sobowtor","Tess Gerritsen - Skalpel","Tess Gerritsen - Sekret, ktorego nie zdradze","Tess Gerritsen - Grzesznik","Patrick Lencioni - Motywacje Lidera","Tess Gerritsen - Autopsja","B.A. Paris - Terapeutka","Renate i Ulrich Dehner - W co oni graja","B.A. Paris - Na skraju zalamania","Chris Carter - Genesis","Chris Carter - Rozmowca","Andrzej Dragan - Kwantechizm 2.0","Chris Carter - Geniusz Zbrodni","Chris Carter - Polowanie na Zlo","Chris Carter - Jestem Smiercia","John Douglas, Mark Olshaker - Jak powstaje morderca","Chris Carter - Nocny Przesladowca","Ron Magliozzi, Jenny He - Tim Burton MoMA","Tom Taylor - Batman Detective","Ron Magliozzi - Rzezbiarze Smierci","Chris Carter - Jeden za drugiego","Brian Tracy - Zjedz te zabe!","Chris Carter - Krucyfiks","Hiromi Kawakami - Nadepnelam na weza","Chris Carter - Egzekutor","Jerzy Vetulani - Bez Ograniczen","Matthew Rosenberg - Joker: The man who stopped laughing","Chris Carter - Galeria Umarlych","Jerzy Vetulani - Sen Alicji","Michael G. Roger's - Zespol zaczyna sie od Ciebie","James Fallon - Mozg Psychopaty","Loreth Anne White - Nasze idealne malzenstwo","Brian Azzarello - The Art of Lee Bermejo","Loreth Anne White - Sekret Pacjentki","Tess Gerritsen - Klub Mefista","Barbee Davis - 97 things every PM should know","Tess Gerritsen - Milczaca dziewczyna","Patrick King - Read people like a book","Tess Gerritsen - Umrzec po raz drugi","Tess Gerritsen - Ostatni, ktory umrze","Karen Pryor - Najpierw wytresuj kurczaka","Sean Murphy - Batman, nie tylko Bialy rycerz","Robert Cialdini - Wywieranie wplywu na ludzi","Tess Gerritsen - Mumia","Margaret Rutherford - Perfekcyjni do bolu","Chris Carter - Dziennik Smierci","Turid Rugaas - Sygnaly uspokajajace","Adam Mirek - Bebechy","Chuck Dixon - Batman: Legacy","Tess Gerritsen - Dolina Umarlych","Sharon Bolton - Ulubione rzeczy","Loreth Anne White - Miasteczko Twin Falls","Tom Steinfort - Grzechy Szejka","Robert Greene - 48 Prawd Wladzy","Chuck Palahniuk - Kolysanka"],
+"2024":["Sonia Rosa - Zony z Forest Hill","Malgorzata Sidon-Rzadzikowska - Profesjonalny coaching","Li Ang - Zona rzeznika","Greg Capullo - Batman/Spawn","Antologia opowiadan futurystycznych - UTOPAY","Jakub Malecki - nikt nie idzie","Robert Ziebinski - Porno. Jak on to robi?","Tamaki Mariko, Reis Ivan, Miki Danny - Batman DC: Wieza","Andrew Bolton - Alexander McQueen Savage Beauty","Jonny Thomson - Wielkie idee dla zabieganych","Cyryl Sone - Krzycz, jesli zyjesz","Milan Kundera - Nieznosna lekkosc bytu","Rachel Davies, Liz Sedley - Agile Coaching","J.D. Barker - Czwarta Malpa","J.D. Barker - Piata Ofiara","J.D. Barker - Szoste Dziecko","Eiichi Shimizu - Batman: Pogromca sprawiedliwosci 1","Michael Bungay Stanier - The coaching habit","Freida McFadden - Pomoc domowa","Freida McFadden - Pomoc domowa. Sekret","Satoshi Miyagawa - Joker: Operacja specjalna tom 1","Mariko Tamaki - Batman DC: Zgaduj-zgadula i inne opowiesci","Tom Taylor - DCeased: Nadzieja na koncu swiata","Tom Taylor - DCeased: Martwa planeta","Alan Grant - Batman: Ziemia Niczyja. Wstrzasy wtorne","Alan Grant - Batman: Epidemia","Julia Cameron - Droga Artysty","Greg Capullo - Batman Black&White: Piesc demona","Lawrence Wright - Szatan w naszym domu","Riley Sager - Tylko ona zostala","Riley Sager - Dom po drugiej stronie jeziora","Riley Sager - Tylko przetrwaj noc","Riley Sager - Zamknij wszystkie drzwi","B.A. Paris - Przyjaciolka","Riley Sager - Jedyne ocalale","Josh Simmons, Patrick Keck - Sen Nietoperza","Eiichi Shimizu - Batman: Pogromca sprawiedliwosci 2","Chuck Palahniuk - Rant","Alan Grant - Batman: Ziemia niczyja Walka o Gotham","Kate Hobler - Kompetentny Scrum Master","Chuck Dixon - Batman Knightfall: Prolog","Chip Zdarsky - Batman: Failsafe tom 1","Roberto Recchioni - Dylan Dog x Batman: Cien nietoperza","David Baldacci - Dzien Zero","Ram V - DC: Batman Gothamski Nokturn: Uwertura","Cormac McCarthy - To nie jest kraj dla starych ludzi","Geoff Johns - Flashpoint: Powrot","Stephen King - Opowiesci makabryczne","Geoff Watts - Team Mastery","DC Comics: Joker - Swiat","Tom King - Gotham: Rok Pierwszy","Sean Murphy - Batman: Pokolenie Jokera","Agatha Christie - I nie bylo juz nikogo","Simon Beckett - Zapisane w kosciach","Chris Carter - Obserwator smierci"],
+"2025":["Agatha Christie - A.B.C.","Ram V, Ivan Reis - Batman DC: Gothamski Nokturn","Lisa Gardner - Pozegnaj sie","Cesario Ramos & Illia Pavlichenko - Creating Agile Organization","Catlin Walker & Marian Way - #DramaFree","Rob Fitzpatrick & Devin Hunt - How to design & teach workshops","Rick L. Ackoff - System Thinking","Calvin Kasulke - Several People Are Typing","Ken Blanchard - The One Minute Manager","Freida McFadden - Nie klam","Freida McFadden - Dobra kolezanka","Ichiro Kishimi - Odwaga bycia nielubianym","Freida McFadden - Zamkniete drzwi","Freida McFadden - Pomoc Domowa. Z ukrycia","Loret Anne White - Dziennik Pokojowki","Freida McFadden - Skazany","Camilla Way - Zle dziecko","Dale Carnegie - How to win friends and influence people","Marsha Acker - The art & Science of facilitation","Simon Beckett - Chemia Smierci","Simon Beckett - Szepty Zmarlych"],
+"2026":["Brian P. Moran - 12 week year","Freida McFadden - Tenat","Donald Martin - Sugar Glider Handbook","Simon Beckett - Niespokojni marli","Kim Scott - Radical Candor","Greg McKeown - Esencjalista","Eric Schmidt - Trillion Dollar Coach","Phillip Garr - Scary stories that went too far","Freida McFadden - Nauczycieli"]
+};
+
+function getBooks() { const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s) : defaultBooks; }
+function saveBooks(b) { localStorage.setItem(STORAGE_KEY, JSON.stringify(b)); }
+let books = getBooks();
+
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200); }
+
+// Edit mode state
+let editMode = false;
+let editYear = null;
+let editIdx = null;
+
+function init() {
+  let total = 0;
+  const ac = {};
+  Object.values(books).forEach(l => { total += l.length; l.forEach(b => {
+    const p = b.split(' - '); if (p.length >= 2) { const a = p[0].trim().split(',')[0].split('/')[0].split('&')[0].trim();
+    if (a && !a.includes('Batman') && !a.includes('Liga') && !a.includes('DC') && !a.includes('Antologia') && !a.includes('Uniwersum') && !a.includes('ALLSTAR')) ac[a] = (ac[a]||0)+1; }
+  }); });
+  const top = Object.entries(ac).sort((a,b) => b[1]-a[1])[0];
+  const yrs = Object.keys(books).sort((a,b) => +a - +b);
+  const last = books[yrs[yrs.length-1]];
+  const recent = last[last.length-1].split(' - ')[0].trim();
+  document.getElementById('total-count').textContent = total;
+  document.getElementById('fav-author').textContent = top ? top[0] : '';
+  document.getElementById('recent-book').textContent = recent;
+  document.getElementById('subtitle').textContent = total + ' books read since ' + yrs[0];
+  renderBooks();
+}
+
+function renderBooks(filter = '') {
+  const c = document.getElementById('content'), nr = document.getElementById('no-results'), rc = document.getElementById('result-count');
+  c.innerHTML = ''; let tm = 0;
+  Object.keys(books).sort((a,b) => +b - +a).forEach(year => {
+    const allBooks = books[year];
+    const fl = filter ? allBooks.filter(b => b.toLowerCase().includes(filter.toLowerCase())) : allBooks;
+    if (!fl.length) return; tm += fl.length;
+    const s = document.createElement('div'); s.className = 'year-section';
+    const o = !!filter;
+    s.innerHTML = `<div class="year-header ${o?'open':''}" onclick="this.classList.toggle('open')"><span class="year-title">${year}</span><span class="year-count">${fl.length} book${fl.length!==1?'s':''} <span class="arrow">&#9660;</span></span></div><div class="book-list">${fl.map((b,i) => {
+      const origIdx = allBooks.indexOf(b);
+      let d = b; if (filter) { const re = new RegExp('('+filter.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'); d = b.replace(re,'<mark>$1</mark>'); }
+      const p = d.split(' - ');
+      return `<div class="book" data-year="${year}" data-idx="${origIdx}"><span class="book-num">${i+1}</span><span class="book-title"><span class="author">${p[0]}</span> — ${p.slice(1).join(' — ')}</span><span class="book-actions"><button class="book-edit" onclick="editBook('${year}',${origIdx})" title="Edit">&#9998;</button></span></div>`;
+    }).join('')}</div>`;
+    c.appendChild(s);
+  });
+  if (filter) { rc.style.display='block'; rc.textContent=tm+' result'+(tm!==1?'s':''); nr.style.display=tm===0?'block':'none'; }
+  else { rc.style.display='none'; nr.style.display='none'; }
+}
+
+// Edit book
+function editBook(year, idx) {
+  editMode = true;
+  editYear = year;
+  editIdx = idx;
+  const entry = books[year][idx];
+  const parts = entry.split(' - ');
+  document.getElementById('modal-title').textContent = 'Edit book';
+  document.getElementById('input-author').value = parts[0].trim();
+  document.getElementById('input-title').value = parts.slice(1).join(' - ').trim();
+  document.getElementById('btn-save').textContent = 'Save';
+  document.getElementById('btn-modal-delete').style.display = 'block';
+  modal.classList.add('open');
+  setTimeout(() => document.getElementById('input-author').focus(), 100);
+}
+
+// Delete from edit modal
+function deleteFromModal() {
+  if (!editMode || !editYear) return;
+  const entry = books[editYear][editIdx];
+  const year = editYear;
+  const idx = editIdx;
+  books[year].splice(idx, 1);
+  if (books[year].length === 0) delete books[year];
+  saveBooks(books);
+  resetModal();
+  modal.classList.remove('open');
+  init();
+  toastUndo('Deleted: ' + entry.split(' - ')[0].trim(), () => {
+    if (!books[year]) books[year] = [];
+    books[year].splice(idx, 0, entry);
+    saveBooks(books);
+    init();
+    toast('Restored!');
+  });
+}
+
+// Toast with undo
+let toastTimer = null;
+function toastUndo(msg, undoFn) {
+  clearTimeout(toastTimer);
+  const t = document.getElementById('toast');
+  t.innerHTML = `<span>${msg}</span><button class="toast-undo" id="undo-btn">UNDO</button>`;
+  t.classList.add('show');
+  document.getElementById('undo-btn').onclick = () => {
+    clearTimeout(toastTimer);
+    t.classList.remove('show');
+    undoFn();
+  };
+  toastTimer = setTimeout(() => t.classList.remove('show'), 5000);
+}
+
+// Reset modal to add mode
+function resetModal() {
+  editMode = false;
+  editYear = null;
+  editIdx = null;
+  document.getElementById('modal-title').textContent = 'Add a book';
+  document.getElementById('btn-save').textContent = 'Add';
+  document.getElementById('btn-modal-delete').style.display = 'none';
+  document.getElementById('input-author').value = '';
+  document.getElementById('input-title').value = '';
+}
+
+document.getElementById('search').addEventListener('input', function() { renderBooks(this.value.trim()); });
+const modal = document.getElementById('modal');
+document.getElementById('add-btn').addEventListener('click', () => { resetModal(); modal.classList.add('open'); setTimeout(() => document.getElementById('input-author').focus(), 100); });
+document.getElementById('btn-cancel').addEventListener('click', () => { resetModal(); modal.classList.remove('open'); });
+modal.addEventListener('click', e => { if (e.target === modal) { resetModal(); modal.classList.remove('open'); } });
+document.getElementById('input-title').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btn-save').click(); });
+document.getElementById('btn-save').addEventListener('click', () => {
+  const a = document.getElementById('input-author').value.trim(), t = document.getElementById('input-title').value.trim();
+  if (!a || !t) return;
+  if (editMode) {
+    // Update in place
+    books[editYear][editIdx] = a + ' - ' + t;
+    saveBooks(books);
+    resetModal();
+    modal.classList.remove('open');
+    init();
+    toast('Updated: ' + a + ' — ' + t);
+  } else {
+    const y = new Date().getFullYear().toString();
+    if (!books[y]) books[y] = [];
+    books[y].push(a + ' - ' + t); saveBooks(books);
+    document.getElementById('input-author').value = ''; document.getElementById('input-title').value = '';
+    modal.classList.remove('open'); init(); toast('Added: ' + a + ' — ' + t);
+  }
+});
+
+// Export/Import
+function exportData() {
+  const data = { books: books, wishlist: wishlist };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'libros-backup-' + new Date().toISOString().split('T')[0] + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('Exported data');
+}
+
+function importData() {
+  document.getElementById('import-file').click();
+}
+
+document.getElementById('import-file').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (data.books) {
+        books = data.books;
+        saveBooks(books);
+      }
+      if (data.wishlist) {
+        wishlist = data.wishlist;
+        saveWishlist(wishlist);
+      }
+      init();
+      renderWishlist();
+      toast('Imported data successfully');
+    } catch(err) {
+      toast('Invalid JSON file');
+    }
+  };
+  reader.readAsText(file);
+  this.value = '';
+});
+
+// Wishlist
+const WISH_KEY = 'libros_wishlist';
+function getWishlist() { const s = localStorage.getItem(WISH_KEY); return s ? JSON.parse(s) : []; }
+function saveWishlist(w) { localStorage.setItem(WISH_KEY, JSON.stringify(w)); }
+let wishlist = getWishlist();
+
+const shops = {
+  pl: [
+    { name: 'Empik', url: q => `https://www.empik.com/szukaj/produkt?q=${q}` },
+    { name: 'Tania', url: q => `https://www.taniaksiazka.pl/Szukaj?q=${q}` },
+    { name: 'Bookomole', url: q => `https://bookomole.pl/szukaj?controller=search&s=${q}` }
+  ],
+  en: [
+    { name: 'Amazon', url: q => `https://www.amazon.es/s?k=${q}` },
+    { name: 'Casa Libro', url: q => `https://www.casadellibro.com/busqueda-generica?busqueda=${q}` },
+    { name: 'Libreria', url: q => `https://www.libreriainglesa.com/en/buscar?controller=search&s=${q}` }
+  ]
+};
+
+function renderWishlist() {
+  const c = document.getElementById('wishlist-content');
+  const cnt = document.getElementById('wish-count');
+  cnt.textContent = wishlist.length ? wishlist.length + ' book' + (wishlist.length !== 1 ? 's' : '') : '';
+  if (!wishlist.length) { c.innerHTML = '<p class="wishlist-empty">Your wishlist is empty. Add books you want to buy.</p>'; return; }
+  c.innerHTML = wishlist.map((w, i) => {
+    const isAuthorOnly = !w.title;
+    const q = encodeURIComponent(isAuthorOnly ? w.author : w.author + ' ' + w.title);
+    const plLinks = shops.pl.map(s => `<a class="shop-btn pl" href="${s.url(q)}" target="_blank" title="${s.name}">${s.name}</a>`).join('');
+    const enLinks = shops.en.map(s => `<a class="shop-btn" href="${s.url(q)}" target="_blank" title="${s.name}">${s.name}</a>`).join('');
+    const label = isAuthorOnly
+      ? `<div class="wish-book">${w.author}</div><div class="wish-author">Browse all books</div>`
+      : `<div class="wish-book">${w.title}</div><div class="wish-author">${w.author}</div>`;
+    const doneBtn = isAuthorOnly ? '' : `<button class="wish-done" onclick="markRead(${i})" title="Mark as read">&#10003;</button>`;
+    return `<div class="wish-item">
+      <div class="wish-info">${label}</div>
+      <div class="wish-actions">
+        ${plLinks}${enLinks}
+        ${doneBtn}
+        <button class="wish-remove" onclick="removeWish(${i})" title="Remove">&#10005;</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function markRead(i) {
+  const w = wishlist[i];
+  const y = new Date().getFullYear().toString();
+  if (!books[y]) books[y] = [];
+  books[y].push(w.author + ' - ' + w.title);
+  saveBooks(books);
+  wishlist.splice(i, 1);
+  saveWishlist(wishlist);
+  init();
+  renderWishlist();
+  toast('Moved to read: ' + w.author + ' — ' + w.title);
+}
+
+function removeWish(i) {
+  const w = wishlist[i];
+  wishlist.splice(i, 1);
+  saveWishlist(wishlist);
+  renderWishlist();
+  toast('Removed: ' + w.title);
+}
+
+const wishModal = document.getElementById('wish-modal');
+document.getElementById('wish-add-btn').addEventListener('click', () => { wishModal.classList.add('open'); setTimeout(() => document.getElementById('wish-input-author').focus(), 100); });
+document.getElementById('wish-btn-cancel').addEventListener('click', () => wishModal.classList.remove('open'));
+wishModal.addEventListener('click', e => { if (e.target === wishModal) wishModal.classList.remove('open'); });
+document.getElementById('wish-input-title').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('wish-btn-save').click(); });
+document.getElementById('wish-btn-save').addEventListener('click', () => {
+  const a = document.getElementById('wish-input-author').value.trim(), t = document.getElementById('wish-input-title').value.trim();
+  if (!a) return;
+  wishlist.push({ author: a, title: t || '' });
+  saveWishlist(wishlist);
+  document.getElementById('wish-input-author').value = ''; document.getElementById('wish-input-title').value = '';
+  wishModal.classList.remove('open');
+  renderWishlist();
+  toast(t ? 'Added to wishlist: ' + a + ' — ' + t : 'Added author: ' + a);
+});
+
+renderWishlist();
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { resetModal(); modal.classList.remove('open'); wishModal.classList.remove('open'); } });
+
+// Liquid glass hover — single press animation on enter, release on leave
+function applyGlassHover(el, transformOnly) {
+  el.addEventListener('mouseenter', e => {
+    const rect = el.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    el.style.transition = 'transform .15s cubic-bezier(.2,.8,.3,1), background .2s, box-shadow .2s, border-color .2s';
+    el.style.transform = `perspective(600px) rotateX(${y*-4}deg) rotateY(${x*4}deg) scale(0.97)`;
+    if (!transformOnly) {
+      el.style.background = getComputedStyle(document.documentElement).getPropertyValue('--glass-press-bg').trim();
+      el.style.boxShadow = getComputedStyle(document.documentElement).getPropertyValue('--glass-press-shadow').trim();
+      el.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--glass-press-border').trim();
+    }
+    setTimeout(() => {
+      el.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1), background .4s, box-shadow .4s, border-color .4s';
+      el.style.transform = `perspective(600px) rotateX(${y*-1.5}deg) rotateY(${x*1.5}deg) scale(1.01)`;
+      if (!transformOnly) {
+        el.style.boxShadow = getComputedStyle(document.documentElement).getPropertyValue('--glass-release-shadow').trim();
+      }
+    }, 150);
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1), background .4s, box-shadow .4s, border-color .4s';
+    el.style.transform = '';
+    if (!transformOnly) { el.style.background = ''; el.style.boxShadow = ''; el.style.borderColor = ''; }
+  });
+}
+document.querySelectorAll('.glass').forEach(applyGlassHover);
+// Logo — just tilt, no scale
+const logoEl = document.querySelector('.logo');
+logoEl.addEventListener('mouseenter', e => {
+  const rect = logoEl.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+  const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  logoEl.style.transition = 'transform .15s cubic-bezier(.2,.8,.3,1)';
+  logoEl.style.transform = `perspective(600px) rotateX(${y*-6}deg) rotateY(${x*6}deg)`;
+  setTimeout(() => {
+    logoEl.style.transition = 'transform .5s cubic-bezier(.16,1,.3,1)';
+    logoEl.style.transform = `perspective(600px) rotateX(${y*-2}deg) rotateY(${x*2}deg)`;
+  }, 150);
+});
+logoEl.addEventListener('mouseleave', () => {
+  logoEl.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1)';
+  logoEl.style.transform = '';
+});
+
+// Re-apply glass hover to wishlist items after render
+const origRenderWishlist = renderWishlist;
+renderWishlist = function() {
+  origRenderWishlist();
+  document.querySelectorAll('.wish-item').forEach(applyGlassHover);
+};
+renderWishlist();
+
+init();
+</script>
+</body>
+</html>
