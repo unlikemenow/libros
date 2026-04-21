@@ -1068,8 +1068,21 @@ const SYNC_REPO = 'unlikemenow/libros';
 const SYNC_FILE = 'data.json';
 const TOKEN_KEY = 'libros_gh_token';
 
-function getToken() { return localStorage.getItem(TOKEN_KEY); }
-function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+function getToken() {
+  // Check URL hash first, save to localStorage if found
+  const hash = window.location.hash;
+  if (hash.includes('token=')) {
+    const t = hash.split('token=')[1].split('&')[0];
+    if (t) localStorage.setItem(TOKEN_KEY, t);
+    return t;
+  }
+  return localStorage.getItem(TOKEN_KEY);
+}
+function setToken(t) {
+  localStorage.setItem(TOKEN_KEY, t);
+  // Update URL hash so it can be bookmarked
+  window.location.hash = 'token=' + t;
+}
 
 async function syncPull() {
   try {
@@ -1124,10 +1137,18 @@ async function doSync() {
 
 // Setup token — called from footer
 function setupSync() {
-  const t = prompt('To sync changes from this device, enter a GitHub token.\\n\\n1. Go to github.com/settings/tokens\\n2. Generate new token (classic)\\n3. Check the \"repo\" scope\\n4. Copy and paste here:');
+  const existing = getToken();
+  if (existing) {
+    const link = window.location.origin + window.location.pathname + '#token=' + existing;
+    prompt('Your magic link (bookmark on any device):', link);
+    return;
+  }
+  const t = prompt('One-time setup:\\n\\n1. Go to github.com/settings/tokens\\n2. Generate new token (classic)\\n3. Check the \"repo\" scope\\n4. Paste here:');
   if (!t) return;
   setToken(t.trim());
-  toast('Token saved — changes will sync automatically');
+  const link = window.location.origin + window.location.pathname + '#token=' + t.trim();
+  prompt('Done! Bookmark this magic link for all your devices:', link);
+  document.getElementById('sync-setup-link').textContent = 'Copy sync link';
   syncPush();
 }
 
@@ -1139,7 +1160,7 @@ const _origSaveW = saveWishlist;
 saveWishlist = function(w) { _origSaveW(w); if (getToken()) { clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1500); } };
 
 document.getElementById('sync-btn').addEventListener('click', doSync);
-document.getElementById('sync-setup-link').textContent = getToken() ? 'Reset sync token' : 'Setup sync';
+document.getElementById('sync-setup-link').textContent = getToken() ? 'Copy sync link' : 'Setup sync';
 
 // Always pull on load (public repo, no token needed)
 function init_app() { init(); }
