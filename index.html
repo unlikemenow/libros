@@ -317,17 +317,15 @@
 
   /* Theme toggle */
   .theme-toggle {
-    position: absolute; top: 0; right: 0;
-    width: 36px; height: 36px; border-radius: 50%;
+    width: 32px; height: 32px; border-radius: 10px;
     border: 1px solid var(--toggle-border);
     background: var(--toggle-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     color: var(--toggle-color);
-    font-size: 1.1rem; cursor: pointer;
+    font-size: 1rem; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: all .25s ease;
-    z-index: 10;
   }
   .theme-toggle:hover {
     background: var(--toggle-hover-bg);
@@ -668,6 +666,8 @@
     <a onclick="exportData()">Export</a>
     <span>&middot;</span>
     <a onclick="importData()">Import</a>
+    <span>&middot;</span>
+    <a onclick="setupSync()" id="sync-setup-link"></a>
     <input type="file" id="import-file" accept=".json" style="display:none">
   </div>
 </div>
@@ -1072,18 +1072,13 @@ function getToken() { return localStorage.getItem(TOKEN_KEY); }
 function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
 
 async function syncPull() {
-  const token = getToken();
-  if (!token) return false;
   try {
-    const res = await fetch(`https://api.github.com/repos/${SYNC_REPO}/contents/${SYNC_FILE}`, {
-      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-    });
+    // Public repo — no token needed to read
+    const res = await fetch(`https://raw.githubusercontent.com/${SYNC_REPO}/main/${SYNC_FILE}?t=${Date.now()}`);
     if (!res.ok) return false;
-    const json = await res.json();
-    const data = JSON.parse(atob(json.content));
+    const data = await res.json();
     if (data.books) { books = data.books; saveBooks(books); }
     if (data.wishlist) { wishlist = data.wishlist; saveWishlist(wishlist); }
-    localStorage.setItem('libros_sha', json.sha);
     return true;
   } catch(e) { console.error('Pull failed:', e); return false; }
 }
@@ -1112,41 +1107,43 @@ async function syncPush() {
 
 async function doSync() {
   const btn = document.getElementById('sync-btn');
-  const token = getToken();
-  if (!token) {
-    const t = prompt('Enter your GitHub Personal Access Token (needs repo scope).\\nCreate one at: github.com/settings/tokens');
-    if (!t) return;
-    setToken(t.trim());
-  }
   btn.classList.add('syncing');
+  // Always pull first (no token needed — public repo)
   const pulled = await syncPull();
-  if (pulled) {
-    init_app();
-    renderWishlist();
-    toast('Synced from GitHub');
-  } else {
+  if (pulled) { init_app(); renderWishlist(); }
+  // Then push if token exists
+  const token = getToken();
+  if (token) {
     const pushed = await syncPush();
-    toast(pushed ? 'Pushed to GitHub' : 'Sync failed — check your token');
+    toast(pushed ? 'Synced' : 'Pull OK, push failed');
+  } else {
+    toast(pulled ? 'Loaded latest data' : 'Sync failed');
   }
   btn.classList.remove('syncing');
 }
 
-// Auto-push after saves (debounced)
+// Setup token — called from footer
+function setupSync() {
+  const t = prompt('To sync changes from this device, enter a GitHub token.\\n\\n1. Go to github.com/settings/tokens\\n2. Generate new token (classic)\\n3. Check the \"repo\" scope\\n4. Copy and paste here:');
+  if (!t) return;
+  setToken(t.trim());
+  toast('Token saved — changes will sync automatically');
+  syncPush();
+}
+
+// Auto-push after saves (debounced, only if token set)
 let pushTimer = null;
 const _origSave = saveBooks;
-saveBooks = function(b) { _origSave(b); clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1000); };
+saveBooks = function(b) { _origSave(b); if (getToken()) { clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1500); } };
 const _origSaveW = saveWishlist;
-saveWishlist = function(w) { _origSaveW(w); clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1000); };
+saveWishlist = function(w) { _origSaveW(w); if (getToken()) { clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1500); } };
 
 document.getElementById('sync-btn').addEventListener('click', doSync);
+document.getElementById('sync-setup-link').textContent = getToken() ? 'Reset sync token' : 'Setup sync';
 
-// Pull on first load if token exists
+// Always pull on load (public repo, no token needed)
 function init_app() { init(); }
-if (getToken()) {
-  syncPull().then(ok => { if (ok) { init_app(); renderWishlist(); } else { init_app(); } });
-} else {
-  init_app();
-}
+syncPull().then(ok => { if (ok) { init_app(); renderWishlist(); } else { init_app(); } });
 </script>
 </body>
 </html>
