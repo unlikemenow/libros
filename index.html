@@ -1144,15 +1144,15 @@ async function syncPush() {
 async function doSync() {
   const btn = document.getElementById('sync-btn');
   btn.classList.add('syncing');
-  // Always pull first (no token needed — public repo)
-  const pulled = await syncPull();
-  if (pulled) { init_app(); renderWishlist(); }
-  // Then push if token exists
   const token = getToken();
   if (token) {
+    // Push local data first so we don't lose changes
     const pushed = await syncPush();
-    toast(pushed ? 'Synced' : 'Pull OK, push failed');
+    toast(pushed ? 'Synced to cloud' : 'Sync failed — check token');
   } else {
+    // No token — can only pull
+    const pulled = await syncPull();
+    if (pulled) { init_app(); renderWishlist(); }
     toast(pulled ? 'Loaded latest data' : 'Sync failed');
   }
   btn.classList.remove('syncing');
@@ -1185,9 +1185,16 @@ saveWishlist = function(w) { _origSaveW(w); if (getToken()) { clearTimeout(pushT
 document.getElementById('sync-btn').addEventListener('click', doSync);
 document.getElementById('sync-setup-link').textContent = getToken() ? 'Copy sync link' : 'Setup sync';
 
-// Always pull on load (public repo, no token needed)
+// On load: only pull from GitHub if no local data (fresh device)
 function init_app() { init(); }
-syncPull().then(ok => { if (ok) { init_app(); renderWishlist(); } else { init_app(); } });
+const hasLocalData = localStorage.getItem(STORAGE_KEY);
+if (!hasLocalData) {
+  // Fresh device — pull from GitHub
+  syncPull().then(ok => { init_app(); renderWishlist(); });
+} else {
+  // Has local data — use it, auto-push will keep GitHub updated
+  init_app();
+}
 </script>
 </body>
 </html>
