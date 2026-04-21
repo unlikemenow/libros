@@ -611,6 +611,20 @@
   .export-import-footer span {
     font-size: 0.68rem; color: var(--footer-color);
   }
+
+  /* Sync */
+  .sync-btn {
+    width: 32px; height: 32px; border-radius: 10px; border: none;
+    background: var(--accent-bg); color: var(--accent);
+    font-size: 0.85rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .2s; margin-right: 4px;
+  }
+  .sync-btn:hover { background: var(--accent-bg-hover); }
+  .sync-btn.syncing { animation: syncSpin 1s linear infinite; }
+  @keyframes syncSpin { 100% { transform: rotate(360deg); } }
+  .sync-status { font-size: 0.6rem; color: var(--text-faint); position: absolute; right: 0; top: 100%; white-space: nowrap; }
+  .header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; position: relative; }
 </style>
 </head>
 <body>
@@ -618,7 +632,10 @@
   <div class="header">
     <div class="logo"><img src="win95flag.png" alt="Windows 95"></div>
     <h1>libros</h1>
-    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">&#9790;</button>
+    <div class="header-actions">
+      <button class="sync-btn" id="sync-btn" title="Sync data">&#8635;</button>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">&#9790;</button>
+    </div>
   </div>
   <p class="subtitle" id="subtitle"></p>
   <div class="stats">
@@ -1046,7 +1063,90 @@ renderWishlist = function() {
 };
 renderWishlist();
 
-init();
+// === GitHub Sync ===
+const SYNC_REPO = 'unlikemenow/libros';
+const SYNC_FILE = 'data.json';
+const TOKEN_KEY = 'libros_gh_token';
+
+function getToken() { return localStorage.getItem(TOKEN_KEY); }
+function setToken(t) { localStorage.setItem(TOKEN_KEY, t); }
+
+async function syncPull() {
+  const token = getToken();
+  if (!token) return false;
+  try {
+    const res = await fetch(`https://api.github.com/repos/${SYNC_REPO}/contents/${SYNC_FILE}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) return false;
+    const json = await res.json();
+    const data = JSON.parse(atob(json.content));
+    if (data.books) { books = data.books; saveBooks(books); }
+    if (data.wishlist) { wishlist = data.wishlist; saveWishlist(wishlist); }
+    localStorage.setItem('libros_sha', json.sha);
+    return true;
+  } catch(e) { console.error('Pull failed:', e); return false; }
+}
+
+async function syncPush() {
+  const token = getToken();
+  if (!token) return false;
+  try {
+    const getRes = await fetch(`https://api.github.com/repos/${SYNC_REPO}/contents/${SYNC_FILE}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    let sha = '';
+    if (getRes.ok) { const j = await getRes.json(); sha = j.sha; }
+    const data = JSON.stringify({ books, wishlist }, null, 2);
+    const body = { message: 'Sync books data', content: btoa(unescape(encodeURIComponent(data))) };
+    if (sha) body.sha = sha;
+    const putRes = await fetch(`https://api.github.com/repos/${SYNC_REPO}/contents/${SYNC_FILE}`, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (putRes.ok) { const r = await putRes.json(); localStorage.setItem('libros_sha', r.content.sha); }
+    return putRes.ok;
+  } catch(e) { console.error('Push failed:', e); return false; }
+}
+
+async function doSync() {
+  const btn = document.getElementById('sync-btn');
+  const token = getToken();
+  if (!token) {
+    const t = prompt('Enter your GitHub Personal Access Token (needs repo scope).\\nCreate one at: github.com/settings/tokens');
+    if (!t) return;
+    setToken(t.trim());
+  }
+  btn.classList.add('syncing');
+  const pulled = await syncPull();
+  if (pulled) {
+    init_app();
+    renderWishlist();
+    toast('Synced from GitHub');
+  } else {
+    const pushed = await syncPush();
+    toast(pushed ? 'Pushed to GitHub' : 'Sync failed — check your token');
+  }
+  btn.classList.remove('syncing');
+}
+
+// Auto-push after saves (debounced)
+let pushTimer = null;
+const _origSave = saveBooks;
+saveBooks = function(b) { _origSave(b); clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1000); };
+const _origSaveW = saveWishlist;
+saveWishlist = function(w) { _origSaveW(w); clearTimeout(pushTimer); pushTimer = setTimeout(() => syncPush(), 1000); };
+
+document.getElementById('sync-btn').addEventListener('click', doSync);
+
+// Pull on first load if token exists
+function init_app() { init(); }
+if (getToken()) {
+  syncPull().then(ok => { if (ok) { init_app(); renderWishlist(); } else { init_app(); } });
+} else {
+  init_app();
+}
 </script>
 </body>
 </html>
