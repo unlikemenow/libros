@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="libros">
+<meta name="theme-color" content="#e8dff5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a1a" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="win95flag.png">
+<link rel="manifest" href="manifest.webmanifest">
 <title>LIBROS</title>
 <style>
   :root {
@@ -208,7 +216,7 @@
   body::before { width: 600px; height: 600px; background: var(--blob1); top: -100px; right: -150px; }
   body::after { width: 500px; height: 500px; background: var(--blob2); bottom: -100px; left: -100px; }
 
-  .container { max-width: 680px; margin: 0 auto; padding: 48px 20px 100px; position: relative; z-index: 1; }
+  .container { max-width: 680px; margin: 0 auto; padding: calc(48px + env(safe-area-inset-top, 0px)) 20px calc(100px + env(safe-area-inset-bottom, 0px)); position: relative; z-index: 1; }
 
   /* Glass base with rotating glow border */
   .glass {
@@ -646,6 +654,25 @@
   .sync-btn.syncing .sync-icon { animation: syncSpin 1s linear infinite; }
   @keyframes syncSpin { 100% { transform: rotate(360deg); } }
   .header-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; position: relative; }
+
+  /* Mobile portrait (iPhone) */
+  @media (max-width: 480px) {
+    .container { padding: calc(28px + env(safe-area-inset-top, 0px)) 16px calc(80px + env(safe-area-inset-bottom, 0px)); }
+    h1 { font-size: 2rem; }
+    .logo { width: 40px; height: 40px; }
+    .subtitle { margin-bottom: 20px; }
+    .theme-toggle, .sync-btn { width: 36px; height: 36px; }
+    .stats { gap: 8px; margin-bottom: 16px; }
+    .stat { padding: 14px 10px; min-height: 78px; }
+    .stat-num { font-size: 1.9rem; }
+    .stat-text { font-size: 0.95rem; }
+    .search, .modal input { font-size: 16px; }
+    .year-header { padding: 14px 16px; }
+    .book { padding: 12px 16px; }
+    .book-title { font-size: 0.9rem; }
+    .wish-item { padding: 14px 14px; }
+    .modal { width: calc(100% - 32px); padding: 24px 20px; }
+  }
 </style>
 </head>
 <body>

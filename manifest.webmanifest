@@ -1,0 +1,11 @@
+{
+  "name": "libros",
+  "short_name": "libros",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e8dff5",
+  "theme_color": "#e8dff5",
+  "icons": [
+    { "src": "win95flag.png", "sizes": "any", "type": "image/png", "purpose": "any" }
+  ]
+}
