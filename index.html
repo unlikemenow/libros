@@ -7,8 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="libros">
-<meta name="theme-color" content="#e8dff5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0a0a1a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0a0a1a">
 <link rel="apple-touch-icon" href="win95flag.png">
 <link rel="manifest" href="manifest.webmanifest">
 <title>LIBROS</title>
@@ -748,12 +747,9 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// Theme toggle
+// Theme toggle — always open in dark mode (light mode has a known glitch)
 (function initTheme() {
-  const saved = localStorage.getItem('libros_theme');
-  if (saved === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
+  document.documentElement.setAttribute('data-theme', 'dark');
   updateToggleIcon();
 })();
 
